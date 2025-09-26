@@ -118,8 +118,8 @@
             animation: shake 2s infinite;
         }
         .frog-icon {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
         }
         .cake-icon {
             width: 60px;
@@ -145,6 +145,16 @@
         .cake-icon8 { top: 65%; right: 20%; }
         .cake-icon9 { bottom: 15%; left: 10%; }
         .cake-icon10 { bottom: 15%; right: 10%; }
+        .error-message {
+            color: #ff0000;
+            font-size: 0.9em;
+            margin-top: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .error-message.show {
+            opacity: 1;
+        }
 
         /* Responsive Design */
         @media (max-width: 600px) {
@@ -184,12 +194,15 @@
                 margin-top: 8px;
             }
             .frog-icon {
+                width: 25px;
+                height: 25px;
+            }
+            .cake-icon {
                 width: 50px;
                 height: 50px;
             }
-            .cake-icon {
-                width: 70px;
-                height: 70px;
+            .error-message {
+                font-size: 0.8em;
             }
         }
 
@@ -220,13 +233,18 @@
         <div class="login-screen" id="loginScreen">
             <img src="cmsn.jpg" alt="Profile" class="profile-image">
             <p class="exception-text">Em là ngoại lệ</p>
-            <p class="exception-text">"Hôm nay là sinh nhật em, ngày duy nhất anh không cần lý do để nói em đặc biệt đến thế nào. Em chính là ngoại lệ ngọt ngào nhất trong cuộc sống vốn dĩ toàn quy tắc của anh. Mong tuổi mới của em rực rỡ như nụ cười khiến anh chẳng thể rời mắt."</p>
-
-            <input type="password" id="passwordInput" placeholder="Nhập mật khẩu">
-            <button onclick="checkPassword()">Gửi</button>
+            <p class="exception-text">"Hôm nay là sinh nhật em, ngày duy nhất anh không cần lý do để nói em đặc biệt đến thế nào. Em chính là ngoại lệ ngọt ngào nhất trong cuộc sống vốn dĩ toàn quy tắc của anh. Mong tuổi mới của em rực rỡ như nụ cười khiến anh chẳng thể rời mắt." 💖</p>
+            <input type="password" id="passwordInput" placeholder="Cô bé ngốc có đoán ra mk k 🐸">
+            <div id="errorMessage" class="error-message"></div>
+            <button onclick="checkPassword()">send tu mi</button>
         </div>
         <div class="birthday-screen" id="birthdayScreen">
-            <div class="message">Chúc mừng sinh nhật Hải Yến tròn 21 tuổi! 🎉 Tuổi 21 là một cột mốc đẹp, đánh dấu sự trưởng thành, tự tin và nhiều cơ hội mới đang chờ phía trước. Chúc Yến luôn rạng rỡ, tràn đầy sức sống, gặp nhiều niềm vui và may mắn trong học tập, công việc cũng như cuộc sống. Mong rằng những ước mơ của Yến sẽ dần trở thành hiện thực, bên cạnh luôn có gia đình, bạn bè yêu thương và đồng hành. Hãy tận hưởng tuổi trẻ thật ý nghĩa và tạo nên những kỷ niệm đáng nhớ. Sinh nhật vui vẻ và hạnh phúc nhé, Hải Yến! 🌸💖</div>
+            <div class="message">Chúc mừng sinh nhật Hải Yến tròn 21 tuổi! 🎉 Tuổi 21 là một cột mốc đẹp, đánh dấu sự trưởng thành, tự tin và nhiều cơ hội mới đang chờ phía trước. Chúc Yến luôn rạng rỡ, tràn đầy sức sống, gặp nhiều niềm vui và may mắn trong học tập, công việc cũng như cuộc sống. Mong rằng những ước mơ của Yến sẽ dần trở thành hiện thực, bên cạnh luôn có gia đình, bạn bè yêu thương và đồng hành. Hãy tận hưởng tuổi trẻ thật ý nghĩa và tạo nên những kỷ niệm đáng nhớ. Sinh nhật vui vẻ và hạnh phúc nhé, Hải Yến!✨💖🌸💞💕💓💗💘💝💟
+😚😘🥰😍🤭😳☺️😊🤗
+🌷🌹🌻🌺🌼🍓🍒🍬🍭
+🐰🐱🐻🐼🐨🐧🐥🐹🦊
+⭐🌙☁️🌈🌊🔥🌌🎶🎀
+🫶🤍💌💎🎉🎊💫👑🌟</div>
             <button class="reset-button" id="resetButton" onclick="resetPage()">Back</button>
         </div>
     </div>
@@ -299,13 +317,18 @@
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
+            const errorMessage = document.getElementById('errorMessage');
             if (password === '26092004') {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('birthdayScreen').style.display = 'block';
                 document.getElementById('resetButton').style.display = 'block';
                 startContinuousEffects();
             } else {
-                alert('Mật khẩu không đúng!');
+                errorMessage.textContent = 'GIỠN MẶT HẢ, DỄ VẬY CŨNG SAI, TÔI HƠI BỊ KHÓ CHỊU ĐẤY!!!!!! 😡🔥👿🤬💢';
+                errorMessage.classList.add('show');
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
             }
         }
 
@@ -316,6 +339,7 @@
             document.getElementById('birthdayScreen').style.display = 'none';
             document.getElementById('resetButton').style.display = 'none';
             document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMessage').classList.remove('show');
         }
     </script>
 </body>
