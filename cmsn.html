@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffe6f0, #e0f7e9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+        }
+        .login-screen, .birthday-screen {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #d8eedf;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        .exception-text {
+            color: #ff8ab5;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .login-screen input {
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+            width: 80%;
+            max-width: 250px;
+        }
+        .login-screen button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-screen button:hover {
+            background-color: #ff8ab5;
+        }
+        .birthday-screen {
+            display: none;
+        }
+        .message {
+            color: #ff8ab5;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-in-out;
+            line-height: 1.5;
+            text-align: justify;
+            padding: 15px;
+        }
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: #ff8ab5;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: floatUp 3s ease-in-out forwards;
+            opacity: 0;
+        }
+        .firework {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+            opacity: 0;
+        }
+        .reset-button {
+            display: none;
+            background-color: #ff8ab5;
+            border: none;
+            font-size: 1.1em;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .reset-button:hover {
+            background-color: #4caf50;
+            transform: scale(1.1);
+        }
+        .frog-icon, .cake-icon {
+            position: absolute;
+            z-index: 0;
+            animation: shake 2s infinite;
+        }
+        .frog-icon {
+            width: 50px;
+            height: 50px;
+        }
+        .cake-icon {
+            width: 60px;
+            height: 60px;
+        }
+        .frog-icon1 { top: 5%; left: 10%; }
+        .frog-icon2 { top: 20%; left: 5%; }
+        .frog-icon3 { top: 40%; left: 15%; }
+        .frog-icon4 { top: 60%; left: 10%; }
+        .frog-icon5 { bottom: 10%; left: 20%; }
+        .frog-icon6 { top: 5%; right: 10%; }
+        .frog-icon7 { top: 20%; right: 5%; }
+        .frog-icon8 { top: 40%; right: 15%; }
+        .frog-icon9 { top: 60%; right: 10%; }
+        .frog-icon10 { bottom: 10%; right: 20%; }
+        .cake-icon1 { top: 10%; left: 20%; }
+        .cake-icon2 { top: 10%; right: 20%; }
+        .cake-icon3 { top: 25%; left: 15%; }
+        .cake-icon4 { top: 25%; right: 15%; }
+        .cake-icon5 { top: 45%; left: 25%; }
+        .cake-icon6 { top: 45%; right: 25%; }
+        .cake-icon7 { top: 65%; left: 20%; }
+        .cake-icon8 { top: 65%; right: 20%; }
+        .cake-icon9 { bottom: 15%; left: 10%; }
+        .cake-icon10 { bottom: 15%; right: 10%; }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .login-screen, .birthday-screen {
+                padding: 10px;
+                border-radius: 8px;
+            }
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+            .exception-text {
+                font-size: 0.9em;
+                margin-bottom: 8px;
+            }
+            .login-screen input {
+                font-size: 0.9em;
+                padding: 6px;
+                margin-bottom: 8px;
+                max-width: 180px;
+            }
+            .login-screen button {
+                font-size: 0.9em;
+                padding: 6px 10px;
+            }
+            .birthday-screen {
+                padding: 8px;
+            }
+            .message {
+                font-size: 0.8em;
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+            .reset-button {
+                font-size: 0.8em;
+                padding: 6px 10px;
+                margin-top: 8px;
+            }
+            .frog-icon {
+                width: 50px;
+                height: 50px;
+            }
+            .cake-icon {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-5px, -5px) rotate(-5deg); }
+            50% { transform: translate(5px, 5px) rotate(5deg); }
+            75% { transform: translate(-5px, -5px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-500px); }
+        }
+        @keyframes explode {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(5); }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-screen" id="loginScreen">
+            <img src="cmsn.jpg" alt="Profile" class="profile-image">
+            <p class="exception-text">Em là ngoại lệ</p>
+            <input type="password" id="passwordInput" placeholder="Nhập mật khẩu">
+            <button onclick="checkPassword()">Gửi</button>
+        </div>
+        <div class="birthday-screen" id="birthdayScreen">
+            <div class="message">Chúc mừng sinh nhật Hải Yến tròn 21 tuổi! 🎉 Tuổi 21 là một cột mốc đẹp, đánh dấu sự trưởng thành, tự tin và nhiều cơ hội mới đang chờ phía trước. Chúc Yến luôn rạng rỡ, tràn đầy sức sống, gặp nhiều niềm vui và may mắn trong học tập, công việc cũng như cuộc sống. Mong rằng những ước mơ của Yến sẽ dần trở thành hiện thực, bên cạnh luôn có gia đình, bạn bè yêu thương và đồng hành. Hãy tận hưởng tuổi trẻ thật ý nghĩa và tạo nên những kỷ niệm đáng nhớ. Sinh nhật vui vẻ và hạnh phúc nhé, Hải Yến! 🌸💖</div>
+            <button class="reset-button" id="resetButton" onclick="resetPage()">Back</button>
+        </div>
+    </div>
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon1">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon2">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon3">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon4">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon5">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon6">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon7">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon8">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon9">
+    <img src="ech.png" alt="Frog Icon" class="frog-icon frog-icon10">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon1">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon2">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon3">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon4">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon5">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon6">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon7">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon8">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon9">
+    <img src="cake.png" alt="Cake Icon" class="cake-icon cake-icon10">
+    <script>
+        let fireworksInterval;
+        let balloonsInterval;
+
+        const colors = ['#ff8ab5', '#ffd700', '#ff0000', '#4caf50']; // pink, yellow, red, green
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = `${Math.random() * 100}vw`;
+            balloon.style.top = '100vh';
+            balloon.style.opacity = '1';
+            balloon.style.animationDelay = '0s';
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 3000);
+        }
+
+        function createFireworkBatch() {
+            for (let i = 0; i < 3; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = `${Math.random() * 100}vw`;
+                firework.style.top = `${Math.random() * 50}vh`;
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.opacity = '1';
+                firework.style.animationDelay = `${Math.random() * 0.5}s`;
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        function startContinuousEffects() {
+            balloonsInterval = setInterval(createBalloon, 500);
+            fireworksInterval = setInterval(createFireworkBatch, 200);
+        }
+
+        function stopContinuousEffects() {
+            if (balloonsInterval) {
+                clearInterval(balloonsInterval);
+                balloonsInterval = null;
+            }
+            if (fireworksInterval) {
+                clearInterval(fireworksInterval);
+                fireworksInterval = null;
+            }
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === '26092004') {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('birthdayScreen').style.display = 'block';
+                document.getElementById('resetButton').style.display = 'block';
+                startContinuousEffects();
+            } else {
+                alert('Mật khẩu không đúng!');
+            }
+        }
+
+        function resetPage() {
+            stopContinuousEffects();
+            document.querySelectorAll('.balloon, .firework').forEach(el => el.remove());
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('birthdayScreen').style.display = 'none';
+            document.getElementById('resetButton').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        }
+    </script>
+</body>
+</html>
